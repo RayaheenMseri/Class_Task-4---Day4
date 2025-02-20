@@ -1,3 +1,5 @@
+import "es6-promise/auto";
+
 //Section 1: Type Annotations & Functions
 //Task 1: Implement a Utility Function
 function capitalizeWords(text: string):
@@ -87,6 +89,7 @@ function filterArray<T>(arr: T[], predicate: (item: T) => boolean): T[] {
 const numbers = [1, 2, 3, 4, 5, 6];
 const evenNumbers = filterArray(numbers, (num) => num % 2 === 0);
 console.log(`Even numbers is : ${evenNumbers}`);
+
 
 
 //Section 5: TypeScript with Async/Await

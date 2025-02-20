@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -34,6 +35,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+Object.defineProperty(exports, "__esModule", { value: true });
+require("es6-promise/auto");
+//Section 1: Type Annotations & Functions
+//Task 1: Implement a Utility Function
 function capitalizeWords(text) {
     if (text == '') {
         return "you enterd an empty strings.";
@@ -42,6 +47,7 @@ function capitalizeWords(text) {
 }
 console.log(capitalizeWords("rayaheen"));
 console.log(capitalizeWords(""));
+//Task 2: Number Validator Function
 function isValidNumber(num) {
     if (typeof (num) == "number") {
         return true;
@@ -62,6 +68,8 @@ function createUser(user) {
     return "User ".concat(user.name, " created successfully");
 }
 console.log(createUser({ name: "Rayaheen", id: 1, email: "rayaheen@gmail.com", idAdmin: true, }));
+//Section 3: Classes & OOP
+//Task 4: Implement a Product Class
 var Product = /** @class */ (function () {
     function Product(name, price, category) {
         this.name = name;
@@ -75,6 +83,8 @@ var Product = /** @class */ (function () {
 }());
 var prod = new Product('Lipstick', 500, 'Beaty');
 console.log("the original price is : ".concat(prod.price, " , the price after discount is : ").concat(prod.getDiscountedPrice(150)));
+//Section 4: Generics & Utility Types
+//Task 5: Implement a Generic Function
 function filterArray(arr, predicate) {
     var result = [];
     for (var _i = 0, arr_1 = arr; _i < arr_1.length; _i++) {
@@ -88,20 +98,36 @@ function filterArray(arr, predicate) {
 var numbers = [1, 2, 3, 4, 5, 6];
 var evenNumbers = filterArray(numbers, function (num) { return num % 2 === 0; });
 console.log("Even numbers is : ".concat(evenNumbers));
-function getUsers(url) {
+//Section 5: TypeScript with Async/Await
+//Task 6: Fetch & Display Users
+function getUsers() {
     return __awaiter(this, void 0, void 0, function () {
-        var response, data;
+        var response, users, error_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, fetch('https://jsonplaceholder.typicode.com/users')];
+                case 0:
+                    _a.trys.push([0, 3, , 4]);
+                    return [4 /*yield*/, fetch('https://jsonplaceholder.typicode.com/users')];
                 case 1:
                     response = _a.sent();
+                    if (!response.ok) {
+                        throw new Error("HTTP error! Status: ".concat(response.status));
+                    }
                     return [4 /*yield*/, response.json()];
                 case 2:
-                    data = _a.sent();
-                    return [2 /*return*/, data];
+                    users = _a.sent();
+                    return [2 /*return*/, users.map(function (user) { return ({
+                            id: user.id,
+                            name: user.name,
+                            email: user.email
+                        }); })];
+                case 3:
+                    error_1 = _a.sent();
+                    console.error('Error fetching users:', error_1);
+                    return [2 /*return*/, []];
+                case 4: return [2 /*return*/];
             }
         });
     });
 }
-console.log(getUsers);
+getUsers().then(function (users) { return console.log(users); });
